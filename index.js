@@ -1,6 +1,6 @@
 "use strict";
 
-module.exports = function(generatorFct) {
+var run = function(generatorFct) {
     // retrieve args
     var generatorArgument = Array.prototype.slice.call(arguments,1);
 
@@ -42,10 +42,14 @@ module.exports = function(generatorFct) {
     return next();
 };
 
-exports.debug =false;
-
-exports.all = function(generatorList){
-
-
-
+var all = function(generatorList){
+    var deffered = [];
+    generatorList.forEach(function(gen){
+        deffered.push(run(gen));
+    });
+    return Promise.all(deffered);
 };
+
+module.exports = exports = run;
+exports.all = all;
+exports.debug =false;

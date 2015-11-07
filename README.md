@@ -53,3 +53,59 @@ g(generatorFct,'hello','genery')
 });
 ```
 
+it is equivalent to:
+
+```js
+
+var generatorFct = function* (arg1,arg2) {
+  var result1 = yield promiseFunction(arg1);
+
+  var result2 = yield promiseFunction(arg2);
+
+  return result1+' '+result2;
+};
+
+g(function *(){
+	var value = yield * generatorFct('hello','genery');
+	// log 'hello genery'
+	console.log(value);
+})
+
+```
+
+## how to execute generator function in parallel
+
+Genery provides a function 'all' that takes in parameter a list of generator function
+Genery will run them in parralel, and return a promise
+Once this promise executed, it return an array containing the execution result of each generator function
+
+
+```js
+
+var generatorFct1 = function* () {
+  var result = yield promiseFunction('hello');
+
+  return result;
+};
+
+var generatorFct2 = function* () {
+  var result = yield promiseFunction('genery');
+
+  return result;
+};
+
+g(function *(){
+	var value = yield g.all('hello','genery');
+	// log 'hello genery'
+	console.log(value[0]+' '+value[1]);
+})
+
+// or
+g.all('hello','genery')
+.then(function(value){
+	// log 'hello genery'
+	console.log(value[0]+' '+value[1]);
+});
+
+```
+
