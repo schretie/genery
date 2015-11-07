@@ -95,7 +95,7 @@ var generatorFct2 = function* () {
 };
 
 g(function *(){
-	var value = yield g.all('hello','genery');
+	var value = yield g.all([generatorFct1,generatorFct2]);
 	// log 'hello genery'
 	console.log(value[0]+' '+value[1]);
 })
