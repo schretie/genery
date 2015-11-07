@@ -2,6 +2,13 @@
 
 Generator async engine for promise
 
+To install genery
+
+```
+npm install genery
+```
+
+## Getting Started
 The gerery API must be used as follow to execute a generator that yield promise:
 
 ```js
@@ -27,8 +34,22 @@ var result2 = yield promiseFunction(' genery');
 });
 ```
 
-To install genery
+## How to pass argument to the generator
 
+```js
+
+var generatorFct = function* (arg1,arg2) {
+  var result1 = yield promiseFunction(arg1);
+
+  var result2 = yield promiseFunction(arg2);
+
+  return result1+' '+result2;
+};
+
+g(generatorFct,'hello','genery')
+.then(function (value) {
+  // log 'hello genery'
+  console.log(value);
+});
 ```
-npm install genery
-```
+

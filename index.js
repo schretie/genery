@@ -1,8 +1,11 @@
 "use strict";
 
 module.exports = function(generatorFct) {
+    // retrieve args
+    var generatorArgument = Array.prototype.slice.call(arguments,1);
+
     // call the generator
-    var generator = generatorFct();
+    var generator = generatorFct.apply(this,generatorArgument);
 
     // build the function that chain the next
     // isError is true if must throw an error on the generator
@@ -40,3 +43,9 @@ module.exports = function(generatorFct) {
 };
 
 exports.debug =false;
+
+exports.all = function(generatorList){
+
+
+
+};
