@@ -7,6 +7,8 @@ To install genery
 ```
 npm install genery
 ```
+## Before Starting
+All the example bellow are available in the folder test/doc.js in Git
 
 ## Getting Started
 The gerery API must be used as follow to execute a generator that yield promise:
@@ -101,7 +103,7 @@ g(function *(){
 })
 
 // or
-g.all('hello','genery')
+g.all([generatorFct1, generatorFct2])
 .then(function(value){
 	// log 'hello genery'
 	console.log(value[0]+' '+value[1]);
