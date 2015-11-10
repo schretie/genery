@@ -181,7 +181,7 @@ Once the g() or g.call() is invoke, genery 'save' the this and assign it to a gl
 The global context can be access using g.currentContext
 To explaim it simply, it provides a 'Continuation Local Storage' (also known as Thread Local in Java: https://en.wikipedia.org/wiki/Thread-local_storage)
 
-On usage of this functionality could be to handle context information for logging
+One usage of this functionality is to handle context information for logging accross inner call
 
 ```js
 var logger = {
@@ -218,12 +218,24 @@ var subSubGenerator = function * () {
 
 let context = {
     logInfo: {
-        sessionId: index,
+        sessionId: 2354,
         event: 'PROCESS'
     }
 }
 
 yield g.call(context, generator);
+
+will output:
+[INFO] {"sessionId":2354,"event":"PROCESS"} call sub generator 1
+[INFO] {"sessionId":2354,"event":"PROCESS"} call sub-sub generator 
+[INFO] {"sessionId":2354,"event":"PROCESS"} call process
+[INFO] {"sessionId":2354,"event":"PROCESS"} process
+[INFO] {"sessionId":2354,"event":"PROCESS"} process
+[INFO] {"sessionId":2354,"event":"PROCESS"} call sub generator 2
+[INFO] {"sessionId":2354,"event":"PROCESS"} call sub-sub generator 
+[INFO] {"sessionId":2354,"event":"PROCESS"} call process
+[INFO] {"sessionId":2354,"event":"PROCESS"} process
+
 
 ```
 
