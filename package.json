@@ -17,10 +17,14 @@
         "all",
         "map",
         "genery",
-        "ES6"
+        "ES6",
+        "Continuation Local Storage",
+        "cls",
+        "Thread Local Storage"
     ],
     "devDependencies": {
-        "mocha": "2.2.3"
+        "mocha": "2.2.3",
+        "lodash": "3.10.1"
     },
     "author": "Stephane Chretien",
     "license": "ISC",
