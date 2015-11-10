@@ -131,6 +131,27 @@ g(function * () {
 })
 
 ```
+## how to use filter
+The filter() method filter array value using a generator function
+
+```js
+var filterPromise = function(param) {
+  return new Promise(function(resolve, reject) {
+      if (param > 4) resolve(true);
+      else resolve(false);
+  });
+};
+
+var filter = function * (value) {
+  var result = yield filterPromise(value);
+  return result;
+};
+
+g.filter([10, 2, 13, 14, 3, 16, 7, 0, 9], filter)
+// output [10, 13, 14, 16, 7, 9]
+.then(console.log)
+
+```
 
 ## how to use call
 The call() method calls a generator function with a given this value and arguments provided individually.
@@ -151,7 +172,7 @@ g.call(context, function * () {
     // log 'hello genery'
     console.log(value);
 })
-```js
+```
 
 ## context management
 The drawback with yield * is the 'this' of the caller is lost.
@@ -206,24 +227,4 @@ yield g.call(context, generator);
 
 ```
 
-## how to use filter
-The filter() method filter array value using a generator function
 
-```js
-var filterPromise = function(param) {
-  return new Promise(function(resolve, reject) {
-      if (param > 4) resolve(true);
-      else resolve(false);
-  });
-};
-
-var filter = function * (value) {
-  var result = yield filterPromise(value);
-  return result;
-};
-
-g.filter([10, 2, 13, 14, 3, 16, 7, 0, 9], filter)
-// output [10, 13, 14, 16, 7, 9]
-.then(console.log)
-
-```
