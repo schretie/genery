@@ -44,7 +44,7 @@ describe('Doc Example:', function() {
             .then(function(value) {
                 // log 'hello genery'
                 assert.equal('hello genery', value);
-                done()
+                done();
             });
     });
 
@@ -61,7 +61,7 @@ describe('Doc Example:', function() {
             var value = yield * generatorFct('hello', 'genery');
             // log 'hello genery'
             assert.equal('hello genery', value);
-            done()
+            done();
         });
     });
 
@@ -132,7 +132,7 @@ describe('Doc Example:', function() {
         var reducer = function * (currentResult, value) {
             var result = yield otherPromiseFunction(currentResult, value);
             return result;
-        }
+        };
 
         g(function * () {
             var mapResult = yield g.map([1, 2, 3, 4, 5, 6, 7, 8, 9], mapper);
@@ -140,14 +140,14 @@ describe('Doc Example:', function() {
             var result = yield g.reduce(mapResult, reducer, initialValue);
             assert.equal(285, result);
             done();
-        })
+        });
     });
 
     it('example_6_call', function(done) {
         var context = {
             param1: 'hello',
             param2: ' genery'
-        }
+        };
 
         g.call(context, function * () {
             var result1 = yield promiseFunction(this.param1);
@@ -228,14 +228,14 @@ describe('Doc Example:', function() {
                     sessionId: index,
                     event: 'PROCESS'
                 }
-            }
+            };
 
             yield g.call(context, generator);
 
-        }).then(function() {
-            done()
-        }).catch(done)
+        })
+            .then(function() {
+                done();
+            })
+            .catch(done);
     });
 });
-
-

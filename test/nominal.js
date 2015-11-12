@@ -1,3 +1,4 @@
+"use strict";
 var g = require('../index.js');
 g.debug = true;
 var assert = require('assert');
@@ -166,7 +167,7 @@ describe('Nominal Use Case:', function() {
             var res = yield * genMethod(10);
             assert.equal(19, res);
 
-            var res = yield * genMethod(20);
+            res = yield * genMethod(20);
             assert.equal(29, res);
 
             return 200;
@@ -184,8 +185,8 @@ describe('Nominal Use Case:', function() {
 
             assert.equal(3, arg1);
             assert.equal(7, arg2);
-            done();
-        },3,7);
+            yield done();
+        }, 3, 7);
 
     });
 

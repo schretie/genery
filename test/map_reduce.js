@@ -1,3 +1,4 @@
+"use strict";
 var g = require('../index.js');
 g.debug = true;
 var assert = require('assert');
@@ -62,7 +63,7 @@ describe('All Use Case:', function() {
         };
 
         var reducer = function * (currentResult, value) {
-            console.log(value)
+            
             var v1 = yield promiseFunction(value);
             return currentResult + v1;
         };
@@ -71,10 +72,10 @@ describe('All Use Case:', function() {
         g(function * () {
             var mapResult = yield g.map([1, 2, 3, 4, 5, 6, 7, 8, 9], mapper);
             var result = yield g.reduce(mapResult, reducer,0);
-            assert.equal(63,result)
+            assert.equal(63,result);
             done();
 
-        }).catch(done);;
+        }).catch(done);
     });
 
 

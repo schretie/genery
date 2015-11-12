@@ -63,7 +63,7 @@ describe('Call Use Case:', function() {
 
         var context = {
             valueToReturn: 17
-        }
+        };
 
         g.call(context, generator1)
             .then(function(res) {
@@ -95,7 +95,7 @@ describe('Call Use Case:', function() {
 
         var context = {
             valueToReturn: 17
-        }
+        };
 
         g.call(context, generator1)
             .then(function(res) {
@@ -126,12 +126,12 @@ describe('Call Use Case:', function() {
             for (let index = 1; index < 20; index++) {
                 let context = {
                     valueToReturn: index
-                }
+                };
 
                 yield g.call(context, generator1)
                     .then(function(res) {
                         assert.equal(index, res);
-                    })
+                    });
             }
         })
             .then(function(res) {
@@ -139,7 +139,7 @@ describe('Call Use Case:', function() {
                 g.traceContext = false;
                 done();
             })
-            .catch(done);;
+            .catch(done);
 
     });
 

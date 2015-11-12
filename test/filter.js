@@ -1,3 +1,4 @@
+"use strict";
 var g = require('../index.js');
 g.debug = true;
 var assert = require('assert');
