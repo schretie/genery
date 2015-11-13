@@ -12,20 +12,12 @@ var promiseFunction = function(param) {
             if (param > 100 && param < 200) return reject(param);
 
             resolve(param);
-        }, 100);
+        }, 1);
     });
 };
 
-
-
-
-
-
-
-
-
 describe('Nominal Use Case:', function() {
-    it('test_1: should execute all next of the generator', function(done) {
+    it('nominal_test_1: should execute all next of the generator', function(done) {
         // nominal
         var mustExecuteAllNextIfNoError = function * () {
 
@@ -46,7 +38,7 @@ describe('Nominal Use Case:', function() {
             .catch(done);
     });
 
-    it('test_2: should catch error if a promise throw an error', function(done) {
+    it('nominal_test_2: should catch error if a promise throw an error', function(done) {
         // throw
         var mustCatchAnErrorIfOnePromiseThrow = function * () {
             try {
@@ -70,7 +62,8 @@ describe('Nominal Use Case:', function() {
             })
             .catch(done);
     });
-    it('test_3: should stop generator execution if a promise throw an error', function(done) {
+    
+    it('nominal_test_3: should stop generator execution if a promise throw an error', function(done) {
         var mustStopExecutionIfOnePromiseThrow = function * () {
 
 
@@ -97,7 +90,7 @@ describe('Nominal Use Case:', function() {
 
     });
 
-    it('test_4: should catch error if a promise reject error', function(done) {
+    it('nominal_test_4: should catch error if a promise reject error', function(done) {
         // reject
         var mustCatchAnErrorIfOnePromiseReject = function * () {
             try {
@@ -122,7 +115,7 @@ describe('Nominal Use Case:', function() {
             .catch(done);
     });
 
-    it('test_5: should stop generator execution if a promise reject error', function(done) {
+    it('nominal_test_5: should stop generator execution if a promise reject error', function(done) {
         var mustStopExecutionIfOnePromiseReject = function * () {
 
             var v1 = yield promiseFunction(4);
@@ -148,7 +141,7 @@ describe('Nominal Use Case:', function() {
 
 
 
-    it('test_6: should manage yield *', function(done) {
+    it('nominal_test_6: should manage yield *', function(done) {
 
 
         var genMethod = function * (initValue) {
@@ -179,7 +172,7 @@ describe('Nominal Use Case:', function() {
             .catch(done);
     });
 
-    it('test_7: should pass argument to the generator', function(done) {
+    it('nominal_test_7: should pass argument to the generator', function(done) {
 
         g(function * (arg1, arg2) {
 
@@ -188,6 +181,28 @@ describe('Nominal Use Case:', function() {
             yield done();
         }, 3, 7);
 
+    });
+
+     it('nominal_test_1: try 1000x', function(done) {
+        // nominal
+        var mustExecuteAllNextIfNoError = function * () {
+            for(let index=0;index<1000;index++){
+                var v1 = yield promiseFunction(4);
+            }
+            assert.equal(4, v1);
+
+            var v2 = yield promiseFunction(5);
+            assert.equal(5, v2);
+
+            return v1 + v2;
+        };
+
+        g(mustExecuteAllNextIfNoError)
+            .then(function(res) {
+                assert.equal(9, res);
+                done();
+            })
+            .catch(done);
     });
 
 });

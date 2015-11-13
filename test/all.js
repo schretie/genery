@@ -1,5 +1,6 @@
 "use strict";
 var g = require('../index.js');
+
 g.debug = true;
 var assert = require('assert');
 
@@ -12,7 +13,7 @@ var promiseFunction = function(param) {
             if (param > 100 && param < 200) return reject(param);
 
             resolve(param);
-        }, 100);
+        }, 1);
     });
 };
 
