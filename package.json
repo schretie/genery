@@ -20,7 +20,9 @@
         "ES6",
         "Continuation Local Storage",
         "cls",
-        "Thread Local Storage"
+        "Thread Local Storage",
+        "express",
+        "mocha"
     ],
     "dependencies":{
         "methods":"1.1.1",
