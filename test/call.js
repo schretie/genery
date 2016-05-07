@@ -128,10 +128,10 @@ describe('Call Use Case:', function() {
                     valueToReturn: index
                 };
 
-                yield g.call(context, generator1)
-                    .then(function(res) {
-                        assert.equal(index, res);
-                    });
+                let result = yield g.call(context, generator1)
+                    //.then(function(res) {
+                assert.equal(index, result);
+                //});
             }
         })
             .then(function(res) {

@@ -312,7 +312,7 @@ now we can use the wrapper as follow
 ```js
 server = yield g_app.listen(3000);
 
-app.get('/test1', function * (req, res) {
+g_app.get('/test1', function * (req, res) {
     var response = yield promiseFunction(req.query.value);
 
     res.send(response);
@@ -323,7 +323,7 @@ app.get('/test1', function * (req, res) {
 
 here is the list of express API that support generator:
 ### API
-app.METHOD(path, function * [, function * ...])
+g_app.METHOD(path, function * [, function * ...])
 
 Method supported:
 

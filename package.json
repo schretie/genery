@@ -1,6 +1,6 @@
 {
     "name": "genery",
-    "version": "0.1.7",
+    "version": "0.1.9",
     "description": "generator async executor and sugar function for generator",
     "main": "index.js",
     "scripts": {
@@ -22,7 +22,9 @@
         "cls",
         "Thread Local Storage",
         "express",
-        "mocha"
+        "mocha",
+        "di",
+        "dependency injection"
     ],
     "dependencies":{
         "methods":"1.1.1",
@@ -31,7 +33,8 @@
     "devDependencies": {
         "mocha": "2.2.3",
         "express": "4.*",
-        "request-promise": "1.0.2"
+        "request-promise": "1.0.2",
+        "pretty-hrtime":"1.0.1"
     },
     "author": "Stephane Chretien",
     "license": "ISC",

@@ -2,6 +2,8 @@
 var g = require('../index.js');
 g.debug = true;
 var assert = require('assert');
+var _ = require('lodash');
+var prettyHrtime = require('pretty-hrtime');
 
 // create a promise function for testing purpose
 var promiseFunction = function(param) {
@@ -51,7 +53,6 @@ describe('Nominal Use Case:', function() {
 
                 return v1 + v2;
             } catch (err) {
-
                 return 999;
             }
         };
@@ -62,7 +63,7 @@ describe('Nominal Use Case:', function() {
             })
             .catch(done);
     });
-    
+
     it('nominal_test_3: should stop generator execution if a promise throw an error', function(done) {
         var mustStopExecutionIfOnePromiseThrow = function * () {
 
@@ -86,7 +87,8 @@ describe('Nominal Use Case:', function() {
                 assert.equal(500, err.message);
 
                 done();
-            });
+            })
+            .catch(done);
 
     });
 
@@ -135,7 +137,8 @@ describe('Nominal Use Case:', function() {
             .catch(function(err) {
                 assert.equal(150, err);
                 done();
-            });
+            })
+            .catch(done);
     });
 
 
@@ -179,27 +182,48 @@ describe('Nominal Use Case:', function() {
             assert.equal(3, arg1);
             assert.equal(7, arg2);
             yield done();
-        }, 3, 7);
+        }, 3, 7)
+            .catch(done);
 
     });
 
-     it('nominal_test_1: try 1000x', function(done) {
+    it('nominal_test_8: yield 1000x', function(done) {
         // nominal
+        g.debug = false;
         var mustExecuteAllNextIfNoError = function * () {
-            for(let index=0;index<1000;index++){
-                var v1 = yield promiseFunction(4);
+            let result = 0;
+            for (let index = 0; index < 1000; index++) {
+                result += yield promiseFunction(4);
             }
-            assert.equal(4, v1);
 
-            var v2 = yield promiseFunction(5);
-            assert.equal(5, v2);
-
-            return v1 + v2;
+            return result;
         };
-
+        var start = process.hrtime();
         g(mustExecuteAllNextIfNoError)
             .then(function(res) {
-                assert.equal(9, res);
+                var end = process.hrtime(start);
+                var words = prettyHrtime(end);
+                console.log(words);
+
+                assert.equal(4000, res);
+                done();
+            })
+            .catch(done);
+    });
+
+    it('nominal_test_9: execute a list of promise', function(done) {
+        // nominal
+        var generatorFct = function * () {
+
+            var result = yield[promiseFunction(4), promiseFunction(5)];
+
+            assert(_.difference([4, 5], result), result + ' is not equal to [4,5] ');
+            return result;
+        };
+
+        g(generatorFct)
+            .then(function(result) {
+                assert(_.difference([4, 5], result), result + ' is not equal to [4,5] ');
                 done();
             })
             .catch(done);

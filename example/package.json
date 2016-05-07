@@ -1,0 +1,44 @@
+{
+    "name": "genery-example-app",
+    "version": "0.0.1",
+    "description": "application example that use the genery framework",
+    "main": "app.js",
+    "scripts": {
+        "test": "mocha"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/schretie/genery.git"
+    },
+    "keywords": [
+        "generator",
+        "promise",
+        "async",
+        "all",
+        "map",
+        "genery",
+        "ES6",
+        "Continuation Local Storage",
+        "cls",
+        "Thread Local Storage",
+        "express",
+        "mocha"
+    ],
+    "dependencies": {
+        "express": "4.*",
+        "lodash": "3.10.1",
+        "mongoose":"4.2.6"
+    },
+    "devDependencies": {
+        "mocha": "2.2.3",
+        "express": "4.*",
+        "request-promise": "1.0.2",
+        "pretty-hrtime": "1.0.1"
+    },
+    "author": "Stephane Chretien",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/schretie/genery/issues"
+    },
+    "homepage": "https://github.com/schretie/genery#readme"
+}
